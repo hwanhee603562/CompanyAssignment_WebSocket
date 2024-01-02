@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.chatWrap{
+	width: 9999px;
+	height: 9999px;
+	margin: 0 auto;
+	background-color: #B2C7DA;
+}
+.rightBox{
+	border: 1px solid red;
+}
+.leftBox{
+	border: 1px solid green;
+}
+
+

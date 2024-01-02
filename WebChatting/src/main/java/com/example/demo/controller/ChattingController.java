@@ -17,22 +17,24 @@ public class ChattingController extends TextWebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         System.out.println("WebSocket 연결 성공: " + session);
         participants.add(session);
+        // 님이 방에 입장하셨습니다
     }
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        System.out.println("WebSocket 오류 발생: " + session);
+        System.out.println("WebSocket 오류 발생: " + exception);
     }
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        System.out.println("WebSocket 연결이 닫혔습니다.: " + session);
+        System.out.println("WebSocket 연결 종료: " + session);
         participants.remove(session);
+        // 님이 방을 나가셨습니다
     }
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
         System.out.println("받은 메시지: " + message.getPayload());
-        // 원하는 로직 추가
+        // 메시지
     }
 }
