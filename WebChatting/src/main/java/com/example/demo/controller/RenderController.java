@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class RenderController {
 	// 채팅방 렌더링
-	@GetMapping("/chattingRoom")
+	@GetMapping("/chatting")
 	public String renderRoom() {
 		return "chattingRoom";
 	}

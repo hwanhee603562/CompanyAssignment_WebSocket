@@ -1,34 +1,34 @@
-
-
-
-// jQuery를 사용하여 document ready 이벤트 핸들링
 $(document).ready(function() {
-	console.log(111);
+    const socket = new WebSocket("ws://localhost:8085/chattingRoom");
 
-	let clientSocket = { current:null };
+    // 소켓이 열렸을 때 이벤트 처리
+    socket.onopen = function(event) {
+        console.log("WebSocket 연결 성공", event);
+    };
 
-	clientSocket.current = new WebSocket("ws://localhost:8085/chattingRoom");
+    // 소켓으로부터 메시지를 받았을 때 이벤트 처리
+    socket.onmessage = function(event) {
+        const receivedMessage = event.data;
+        console.log("받은 메시지:", receivedMessage);
+    };
 
-	// 1. 서버소켓과 연동 성공했을 때 이후 행동/메소드 정의
-	clientSocket.current.onopen = e => {
-		console.log('onopen');
-		console.log(e);
-	};
+    // 소켓이 닫혔을 때 이벤트 처리
+    socket.onclose = function(event) {
+        console.log("WebSocket 연결이 닫혔습니다.", event);
+    };
 
-	// 2. 서버소켓과 세션 오류가 발생했을 때 이후 행동/메소드 정의
-	clientSocket.current.onerror = e => {
-		console.log('onerror');
-		console.log(e);
-	};
+    // 에러가 발생했을 때 이벤트 처리
+    socket.onerror = function(event) {
+        console.error("WebSocket 오류 발생", event);
+    };
 
-	// 3. 서버소켓과 연동이 끊겼을 때 이후 행동/메소드 정의
-	clientSocket.current.onclose = e => {
-		console.log('close');
-		console.log(e);
-	};
-
-	// 4. 서버소켓으로부터 메시지를 받았을 때 이후 행동/메소드 정의
-	clientSocket.current.onmessage = e => {
-		alert(e.data);
-	};
+    // 메시지 전송 예제
+    function sendMessage(message) {
+        if(socket.readyState === WebSocket.OPEN) {
+            socket.send(message);
+            console.log("메시지 전송:", message);
+        } else {
+            console.error("WebSocket 연결이 열리지 않았습니다.");
+        }
+    }
 });
