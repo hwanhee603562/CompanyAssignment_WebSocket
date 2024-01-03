@@ -46,11 +46,15 @@
 	font-size: 9px;
 }
 .rContent, .lContent{
-	background-color: white;
 	border-radius: 3px;
 	font-size: 14px;
 }
-
+.lContent{
+	background-color: white;
+}
+.rContent{
+	background-color: yellow;
+}
 
 
 
